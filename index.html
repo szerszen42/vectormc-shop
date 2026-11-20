@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VectorMc Store - Profesjonalne Boty Minecraft (Node.js & Rust Edition)</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TŁO Z EFEKTAMI CZĄSTECZKOWYMI / GRADIENTEM -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- GÓRNY PASEK NAWIGACJI -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">⚡</div>
+        <div class="brand-text">
+          <span>Vector<span class="text-accent">Mc</span></span>
+          <span class="brand-sub">BOT SUITE</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#editions">Wersje & Ceny</a>
+        <a href="#comparison">Porównanie Silników</a>
+        <a href="#how-it-works">Jak Kupić i Aktywować</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#editions" class="btn btn-primary btn-sm">
+          <span>🛒 Zobacz Ceny</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SEKCJA HERO -->
+  <header class="hero-section">
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        <span>OFICJALNY SKLEP BOTÓW MINECRAFT • WERSJA 3.0</span>
+      </div>
+
+      <h1 class="hero-title">
+        Zdominuj Serwery Minecraft.<br>
+        <span class="gradient-text">Wybierz Swoją Wersję Bota.</span>
+      </h1>
+
+      <p class="hero-desc">
+        Niezawodne boty z nowoczesnym panelem okienkowym <strong>Web GUI</strong>, omijaniem Anti-AFK, auto-reconnectem, blenderem proxy SOCKS5 oraz inteligentnym auto-miningiem.
+      </p>
+
+      <div class="hero-highlights">
+        <div class="highlight-item">
+          <span class="icon">⚡</span>
+          <div>
+            <strong>Do Wyboru 2 Silniki</strong>
+            <p>Klasyczny Node.js lub Ultra-Szybki Rust</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <span class="icon">🛡️</span>
+          <div>
+            <strong>Licencja HWID</strong>
+            <p>Bezpieczna aktywacja powiązana ze sprzętem</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <span class="icon">🤖</span>
+          <div>
+            <strong>Multi-Bot & Auto-Mining</strong>
+            <p>Masowe logowanie i automatyczne kopanie</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#editions" class="btn btn-primary btn-lg">
+          <span>🔥 Zobacz Dostępne Edycje i Ceny</span>
+        </a>
+        <a href="#comparison" class="btn btn-secondary btn-lg">
+          <span>⚖️ Porównaj Node.js vs Rust</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRZEŁĄCZNIK OKRESU LICENCJI (INTERAKTYWNY) -->
+  <section class="duration-section" id="editions">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">ELASTYCZNE PLANY</span>
+        <h2>Wybierz Okres Ważności Licencji</h2>
+        <p>Wszystkie licencje są generowane i zabezpieczane unikalnym kodem HWID Twojego komputera.</p>
+      </div>
+
+      <div class="duration-selector-bar">
+        <button type="button" class="duration-btn" data-duration="1d">
+          <span class="badge-tag">Test</span>
+          <span class="duration-title">1 Dzień</span>
+        </button>
+        <button type="button" class="duration-btn" data-duration="7d">
+          <span class="duration-title">7 Dni (1 Tydzień)</span>
+        </button>
+        <button type="button" class="duration-btn active" data-duration="30d">
+          <span class="badge-tag popular">Hit</span>
+          <span class="duration-title">30 Dni (Miesiąc)</span>
+        </button>
+      </div>
+
+      <!-- KARTY DWÓCH WERSJI BOTA -->
+      <div class="pricing-grid">
+
+        <!-- KARTA 1: WERSJA ZWYKŁA (NODE.JS) -->
+        <div class="pricing-card card-node" id="card-node">
+          <div class="card-header">
+            <div class="card-badge">Klasyczna Wersja</div>
+            <h3 class="card-title">VectorMc Standard</h3>
+            <p class="card-sub">Silnik Node.js (Mineflayer Edition)</p>
+            <div class="card-price-box">
+              <span class="price-val" id="price-node-val">Cena: Do ustalenia</span>
+              <span class="price-period" id="price-node-period">/ za 30 dni</span>
+            </div>
+            <p class="price-note">Idealne rozwiązanie dla osób szukających prostego, sprawdzonego bota na 1-3 konta.</p>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <ul class="features-list">
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>Silnik Node.js (Mineflayer)</strong> – stabilny i sprawdzony</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>Nowoczesny Panel Okienkowy Web GUI</strong> w przeglądarce</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>Anti-AFK & Komendy</strong> (!goto, !follow, !stop, !jump)</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>Obsługa Proxy SOCKS5 / SOCKS4</strong> z testerem pingu</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>Obsługa 1-3 botów</strong> jednocześnie</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>Skróty na Pulpicie</strong> – brak skomplikowanej instalacji</span>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <span><strong>Licencja HWID</strong> powiązana z Twoim komputerem</span>
+            </li>
+          </ul>
+
+          <div class="card-action">
+            <button type="button" class="btn btn-secondary btn-block" onclick="openOrderModal('node')">
+              <span>Wybierz Wersję Standard (Node.js)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- KARTA 2: WERSJA PREMIUM (VECTORMC RUST) -->
+        <div class="pricing-card card-rust featured" id="card-rust">
+          <div class="featured-ribbon">🔥 POLECAMY - NAJWYŻSZA WYDAJNOŚĆ</div>
+          
+          <div class="card-header">
+            <div class="card-badge premium-badge">⚡ Wersja PRO / Premium</div>
+            <h3 class="card-title">VectorMc PRO</h3>
+            <p class="card-sub">Natywny Silnik w języku Rust (Rust Edition)</p>
+            <div class="card-price-box">
+              <span class="price-val premium-price" id="price-rust-val">Cena: Do ustalenia</span>
+              <span class="price-period" id="price-rust-period">/ za 30 dni</span>
+            </div>
+            <p class="price-note">Stworzony do masowego farmingu, dziesiątek botów na raz, zero lagów i minimalny RAM.</p>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <ul class="features-list premium-features">
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Ultra-wydajny Silnik w języku Rust</strong> (Natywny kod maszynowy x64)</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Multi-Bot bez ograniczeń</strong> – odpalaj 10, 50, a nawet 100+ botów na jednym PC!</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Zerowe zużycie pamięci RAM</strong> (zaledwie ~15 MB na bota zamiast 200 MB!)</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>SOCKS5 Proxy Blender z Auto-Rotacją</strong> i inteligentnym wykrywaniem banów</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Inteligentny Auto-Miner</strong> – autonomiczne kopanie rud, drewna, ścieżki 3D</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Auto-Join & Omijanie Menu</strong> (automatyczny wybór slotów w GUI serwera)</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Dedykowane Okno Aplikacji (Edge App Mode)</strong> – uruchamia się jak natywny program</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Discord Webhooks</strong> – powiadomienia na Twój kanał o wejściu, zgonie i balu $</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Wbudowany Strażnik Licencji HWID</strong> – autostop i natychmiastowe kopiowanie HWID</span>
+            </li>
+            <li>
+              <span class="check-icon gold">★</span>
+              <span><strong>Priorytetowe Wsparcie Twórcy (Sylwek)</strong> i stałe aktualizacje silnika</span>
+            </li>
+          </ul>
+
+          <div class="card-action">
+            <button type="button" class="btn btn-primary btn-glow btn-block" onclick="openOrderModal('rust')">
+              <span>🚀 Zamów Wersję PRO (Rust)</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TABELA PORÓWNANIA SILNIKÓW -->
+  <section class="comparison-section" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">DOKŁADNE ZESTAWIENIE</span>
+        <h2>Porównanie Silników: Node.js vs Rust</h2>
+        <p>Zobacz różnice techniczne pomiędzy wersją standardową a zaawansowaną edycją w Rust.</p>
+      </div>
+
+      <div class="table-card glass-card">
+        <div class="table-responsive">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Cecha / Parametr</th>
+                <th class="col-node">Wersja Zwykła (Node.js)</th>
+                <th class="col-rust highlight-col">VectorMc PRO (Rust) 👑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Język i Silnik</strong></td>
+                <td>JavaScript / Node.js (Mineflayer)</td>
+                <td class="highlight-col"><span class="badge-tech rust">100% Natywny Rust x64</span></td>
+              </tr>
+              <tr>
+                <td><strong>Zużycie pamięci RAM na 1 bota</strong></td>
+                <td>~150 MB - 300 MB</td>
+                <td class="highlight-col"><span class="text-green font-bold">~12 MB - 20 MB (Nawet 15x mniej!)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Maksymalna liczba botów na PC</strong></td>
+                <td>1 - 5 botów</td>
+                <td class="highlight-col"><span class="text-green font-bold">50 - 100+ botów płynnie</span></td>
+              </tr>
+              <tr>
+                <td><strong>Zużycie procesora (CPU)</strong></td>
+                <td>Średnie / Wyższe</td>
+                <td class="highlight-col"><span class="text-green font-bold">Znikome (Mikrosekundowy tick)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Obsługa Serwerów Proxy</strong></td>
+                <td>SOCKS5 / SOCKS4 ręczne</td>
+                <td class="highlight-col"><span class="text-accent font-bold">Zaawansowany Proxy Blender & Auto-Rotacja</span></td>
+              </tr>
+              <tr>
+                <td><strong>Auto-Miner & Farming</strong></td>
+                <td>Podstawowy</td>
+                <td class="highlight-col"><span class="text-accent font-bold">Zaawansowany Pathfinding 3D & Auto-Ekwipunek</span></td>
+              </tr>
+              <tr>
+                <td><strong>Omijanie Menu Serwerowych (Auto-Join)</strong></td>
+                <td>Ręczne komendy</td>
+                <td class="highlight-col"><span class="text-green font-bold">Pełne automatyczne klikanie slotów & okien</span></td>
+              </tr>
+              <tr>
+                <td><strong>Discord Webhooki</strong></td>
+                <td>Podstawowe</td>
+                <td class="highlight-col"><span class="text-green font-bold">Pełne statusy, saldo konta $, ping, kick logi</span></td>
+              </tr>
+              <tr>
+                <td><strong>Format Uruchamiania</strong></td>
+                <td>Folder skryptu / konsola</td>
+                <td class="highlight-col"><span class="text-green font-bold">Pojedynczy plik .EXE + Dedykowana Aplikacja Edge</span></td>
+              </tr>
+              <tr>
+                <td><strong>Ochrona Licencji HWID</strong></td>
+                <td>Tak</td>
+                <td class="highlight-col"><span class="text-green font-bold">Tak (z autostopem i auto-kopiowaniem do schowka)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JAK KUPIĆ I AKTYWOWAĆ (KROK PO KROKU) -->
+  <section class="steps-section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">PROSTY PROCES</span>
+        <h2>Jak Wygląda Zakup i Aktywacja?</h2>
+        <p>Tylko 4 proste kroki dzielą Cię od uruchomienia bota na Twoim komputerze.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon">📦</div>
+          <h4>Wybierz Wersję</h4>
+          <p>Wybierz wersję bota (Standard Node.js lub PRO Rust) oraz preferowany okres licencji.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon">💬</div>
+          <h4>Napisz do Sylwka</h4>
+          <p>Skontaktuj się ze mną na Discordzie lub Telegramie. Ustalimy płatność i wyślę Ci paczkę z botem.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon">📋</div>
+          <h4>Skopiuj Kod HWID</h4>
+          <p>Uruchom bota na swoim komputerze. Program natychmiast sam skopiuje Twój unikalny kod HWID do schowka (Ctrl+V)!</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon">🚀</div>
+          <h4>Błyskawiczna Aktywacja</h4>
+          <p>Wyślij mi kod HWID. Aktywuję licencję w generatorze w kilkanaście sekund – bot od razu się odblokuje i działa!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CZĘSTO ZADAWANE PYTANIA (FAQ) -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">PYTANIA I ODPOWIEDZI</span>
+        <h2>Najczęściej Zadawane Pytania (FAQ)</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Czy bot działa na serwerach Non-Premium i Premium?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Tak! Obie wersje bota obsługują zarówno konta i serwery Non-Premium (dowolny nick, automatyczna rejestracja/logowanie), jak i serwery z autoryzacją online.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Jak działa licencja HWID i co jeśli zmienię komputer?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Licencja powiązana jest z unikalnym sprzętowym identyfikatorem komputera (płyta główna/BIOS). W przypadku wymiany podzespołów lub komputera wystarczy napisać do Sylwka – stara licencja zostanie przepisana na Twój nowy sprzęt.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Co się dzieje po upływie terminu licencji?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Zgodnie z systemem bezpieczeństwa, po zakończeniu ważności licencji program natychmiast zatrzymuje wszystkie boty i wyświetla na ekranie okno z nowym kodem HWID do przedłużenia, który jest automatycznie kopiowany do Twojego schowka.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Dlaczego wersja w języku Rust jest tak polecana?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Język Rust kompiluje się bezpośrednio do kodu maszynowego bez powolnej wirtualnej maszyny. Dzięki temu bot zużywa jedynie ułamek pamięci RAM (~15 MB zamiast 250 MB) i pozwala uruchomić nawet 50-100 botów jednocześnie na zwykłym domowym komputerze bez żadnych zacięć.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Czy bot posiada zabezpieczenia przed wykryciem (Anti-Ban)?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Tak, bot posiada losowe opóźnienia pakietów, ludzkie ruchy głową i ciałem (Anti-AFK), wsparcie dla rotacji proxy SOCKS5 (każdy bot z osobnym adresem IP) oraz omijanie zabezpieczeń CAPTCHA i menu logowania serwerów.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL ZAMÓWIENIA / GENERATOR WIADOMOŚCI -->
+  <div class="modal-overlay" id="order-modal-overlay" style="display: none;">
+    <div class="order-modal glass-card">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-icon">🛒</span>
+          <div>
+            <h3>Zamówienie Licencji Bota</h3>
+            <p id="modal-edition-subtitle">Skonfiguruj swoje zamówienie i wyślij je do Sylwka</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" onclick="closeOrderModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="order-form">
+          
+          <div class="form-group">
+            <label>Wybrana Wersja Bota:</label>
+            <div class="edition-toggle-pills">
+              <label class="pill-option">
+                <input type="radio" name="order-edition" value="node" id="radio-edition-node">
+                <span class="pill-content">
+                  <strong>Standard (Node.js)</strong>
+                  <small>Wersja Klasyczna</small>
+                </span>
+              </label>
+
+              <label class="pill-option">
+                <input type="radio" name="order-edition" value="rust" id="radio-edition-rust" checked>
+                <span class="pill-content premium-pill">
+                  <strong>VectorMc PRO (Rust) 👑</strong>
+                  <small>Wersja Premium</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="order-duration">Okres Licencji:</label>
+            <select id="order-duration">
+              <option value="1d">1 Dzień (Testowa)</option>
+              <option value="7d">7 Dni (1 Tydzień)</option>
+              <option value="30d" selected>30 Dni (1 Miesiąc)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="order-client-nick">Twój Nick / Discord:</label>
+            <input type="text" id="order-client-nick" placeholder="np. Marcin_Craft lub Marcin#1234" autocomplete="off" required>
+          </div>
+
+          <div class="form-group">
+            <label for="order-client-email">Twój Adres E-mail (do potwierdzenia i paragonu Stripe):</label>
+            <input type="email" id="order-client-email" placeholder="np. twoj.email@gmail.com" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="order-hwid">Twój Kod HWID komputera (do natychmiastowej aktywacji):</label>
+            <div class="input-with-btn">
+              <input type="text" id="order-hwid" class="mono" placeholder="np. 03D502E0-045E-052C-E306-BA0700080009" autocomplete="off" required>
+              <button type="button" class="btn btn-paste" id="btn-paste-order-hwid">📋 Wklej</button>
+            </div>
+            <small style="color: #38bdf8; font-size: 11.5px; margin-top: 4px; display: block;">
+              💡 <em>Uruchom pobranego bota na swoim PC – program sam skopiuje Twój kod HWID do schowka!</em>
+            </small>
+          </div>
+
+          <!-- GŁÓWNA AUTOMATYCZNA PŁATNOŚĆ STRIPE -->
+          <div style="margin: 24px 0 16px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 14px; padding: 18px; text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;">
+              <span style="font-size: 18px;">⚡</span>
+              <strong style="color: #60a5fa; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Błyskawiczna Płatność & Auto-Aktywacja</strong>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-glow btn-block" id="btn-pay-stripe" style="font-size: 15px; padding: 15px; font-weight: 800;">
+              💳 ZAPŁAĆ BEZPIECZNIE PRZEZ STRIPE (BLIK / KARTA)
+            </button>
+            
+            <div style="display: flex; justify-content: center; gap: 14px; margin-top: 10px; font-size: 11.5px; color: var(--text-muted);">
+              <span>🔒 100% Bezpieczne szyfrowanie</span>
+              <span>•</span>
+              <span>⚡ Aktywacja w 1 sekundę</span>
+              <span>•</span>
+              <span>📱 BLIK, Karta, Apple Pay</span>
+            </div>
+            <div id="stripe-loading-msg" style="display: none; color: #38bdf8; font-size: 13px; margin-top: 10px; font-weight: 600;">
+              ⏳ Łączenie ze Stripe Checkout... Proszę czekać...
+            </div>
+          </div>
+
+          <!-- ALTERNATYWNY KONTAKT RĘCZNY -->
+          <div style="position: relative; text-align: center; margin: 20px 0 16px;">
+            <div style="height: 1px; background: var(--border-color);"></div>
+            <span style="position: relative; top: -11px; background: #0e1526; padding: 0 12px; font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+              LUB ZAMÓW RĘCZNIE U SYLWKA (PSC / KRYPTO / BLIK PRYWATNY)
+            </span>
+          </div>
+
+          <!-- GENEROWANY TEKST ZAMÓWIENIA -->
+          <div class="generated-message-box" style="margin-top: 0;">
+            <label>Gotowa treść wiadomości do wysłania do Sylwka:</label>
+            <textarea id="order-generated-text" readonly rows="3" class="mono"></textarea>
+          </div>
+
+          <div class="modal-buttons">
+            <button type="button" class="btn btn-secondary" id="btn-copy-order-text">
+              📋 Skopiuj Wiadomość
+            </button>
+            <button type="button" class="btn btn-secondary" id="btn-contact-sylwek">
+              💬 Napisz na Discord
+            </button>
+          </div>
+          <div id="copy-order-status" class="copy-status-msg" style="display: none;">
+            ✅ Skopiowano treść zamówienia do schowka! Wklej ją w wiadomości do Sylwka (Ctrl+V).
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOPKA STRONY -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="logo-icon">⚡</div>
+        <div>
+          <h3>VectorMc Bot Suite</h3>
+          <p>Niezależne, profesjonalne oprogramowanie do automatyzacji Minecraft.</p>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <h4>Twórca Projektu</h4>
+          <p><strong>Sylwek</strong> – Deweloper & Administrator</p>
+          <p style="color: var(--text-muted); font-size: 12.5px;">Wszelkie licencje, kody HWID i pytania kieruj bezpośrednio w kontakcie.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 VectorMc. Wszystkie prawa zastrzeżone. Minecraft jest znakiem towarowym Mojang AB / Microsoft.</p>
+    </div>
+  </footer>
+
+  <!-- SKRYPTY -->
+  <script src="prices_config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

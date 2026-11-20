@@ -1,0 +1,84 @@
+// =======================================================================
+// KONFIGURACJA SKLEPU VECTORMC & INTEGRACJI ZE STRIPE
+// Tutaj możesz w każdej chwili wpisać swoje ceny, klucze Stripe i Discord!
+// =======================================================================
+
+const SHOP_CONFIG = {
+  // 1. DANE INTEGRACJI STRIPE (Płatności BLIK, Karta, Apple Pay, Google Pay)
+  // Klucze ze stripe.com (pk_test_... i sk_test_...)
+  stripe: {
+    enabled: true, // Ustaw na true, aby włączyć płatności Stripe
+    currency: "pln", // Waluta: pln, eur, usd
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "pk_test_KLUCZ_PUBLICZNY_STRIPE",
+    secretKey: process.env.STRIPE_SECRET_KEY || "sk_test_KLUCZ_PRYWATNY_STRIPE",
+    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET || "whsec_WSTAW_WEBHOOK_SECRET", // z zakładki Webhooks w Stripe
+    testModeSimulator: false // Prawdziwa kasa Stripe Checkout aktywna!
+  },
+
+  // 2. POWIADOMIENIA DISCORD WEBHOOK
+  // Wklej tutaj URL webhooka ze swojego serwera Discord, aby dostawać powiadomienia o każdym zakupie!
+  discord: {
+    webhookUrl: "", // np. https://discord.com/api/webhooks/...
+    notifyOnPayment: true
+  },
+
+  // 3. DANE KONTAKTOWE SYLWKA (Twórcy)
+  contact: {
+    authorName: "Sylwek",
+    discordNick: "Sylwek (Napisz na Discord)",
+    discordServerInvite: "", // wklej link do serwera Discord jeśli posiadasz
+    telegram: "@VectorMcBot",
+    contactNote: "W razie pytań lub płatności alternatywnych (np. PSC, Krypto) napisz bezpośrednio do mnie!"
+  },
+
+  // 4. CENY: WERSJA ZWYKŁA (Node.js Edition - mc-bot-node)
+  // Kwoty podane w PLN (złotych) - 50% taniej względem PRO
+  nodeEdition: {
+    name: "VectorMc Standard (Node.js)",
+    subname: "Klasyczny, sprawdzony bot z panelem Web GUI",
+    badge: "Dla Początkujących",
+    prices: {
+      "1d": "2.50 PLN",
+      "7d": "5 PLN",
+      "30d": "10 PLN",
+      "365d": "37.50 PLN",
+      "lifetime": "75 PLN"
+    },
+    // Kwoty numeryczne dla Stripe (w PLN)
+    stripeAmounts: {
+      "1d": 2.50,
+      "7d": 5.00,
+      "30d": 10.00,
+      "365d": 37.50,
+      "lifetime": 75.00
+    }
+  },
+
+  // 5. CENY: WERSJA PREMIUM (VectorMc Rust Edition - PRO)
+  // Kwoty podane w PLN (złotych)
+  rustEdition: {
+    name: "VectorMc PRO (Rust Edition)",
+    subname: "Ultra-szybki silnik w Rust • Multi-Bot • Zerowe zużycie RAM",
+    badge: "🔥 NAJLEPSZY WYBÓR - BESTSELLER",
+    prices: {
+      "1d": "5 PLN",
+      "7d": "10 PLN",
+      "30d": "20 PLN",
+      "365d": "75 PLN",
+      "lifetime": "150 PLN"
+    },
+    // Kwoty numeryczne dla Stripe (w PLN)
+    stripeAmounts: {
+      "1d": 5.00,
+      "7d": 10.00,
+      "30d": 20.00,
+      "365d": 75.00,
+      "lifetime": 150.00
+    }
+  }
+};
+
+// Eksport dla Node.js
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = SHOP_CONFIG;
+}

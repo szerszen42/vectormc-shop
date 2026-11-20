@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Płatność Zakończona Sukcesem - VectorMc</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .success-card {
+      max-width: 680px;
+      width: 100%;
+      background: rgba(14, 21, 38, 0.94);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 24px;
+      padding: 44px 38px;
+      text-align: center;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 50px rgba(16, 185, 129, 0.15);
+      position: relative;
+      z-index: 10;
+    }
+
+    .success-icon-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      border: 2px solid rgba(16, 185, 129, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.35);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.4); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #34d399;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .success-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .details-box {
+      background: rgba(6, 10, 20, 0.85);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .detail-row:first-child {
+      padding-top: 0;
+    }
+
+    .detail-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .detail-val {
+      font-weight: 700;
+      color: white;
+    }
+
+    .detail-val.hwid-val {
+      font-family: var(--font-mono);
+      color: #93c5fd;
+      font-size: 13px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .download-section {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .instructions-box {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px dashed rgba(59, 130, 246, 0.35);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #93c5fd;
+      line-height: 1.5;
+      text-align: left;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="grid-overlay"></div>
+
+  <div class="success-card">
+    <div class="success-icon-box">✓</div>
+
+    <h1 class="success-title">PŁATNOŚĆ ZAKOŃCZONA SUKCESEM!</h1>
+    <p class="success-desc">
+      Dziękujemy za zakup! Twoja licencja została <strong>automatycznie aktywowana w bazie danych serwera</strong>. Twój bot jest w pełni gotowy do działania!
+    </p>
+
+    <!-- SZCZEGÓŁY ZAMÓWIENIA -->
+    <div class="details-box">
+      <div class="detail-row">
+        <span class="detail-label">Status Licencji:</span>
+        <span class="detail-val">
+          <span class="status-pill">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #34d399;"></span>
+            AKTYWNA W BAZIE
+          </span>
+        </span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Wybrana Wersja:</span>
+        <span class="detail-val" id="disp-edition">VectorMc PRO (Rust Edition)</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Okres Ważności:</span>
+        <span class="detail-val" id="disp-duration">30 Dni</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Twój Kod HWID:</span>
+        <span class="detail-val hwid-val" id="disp-hwid">Ładowanie...</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Klient:</span>
+        <span class="detail-val" id="disp-nick">Użytkownik</span>
+      </div>
+    </div>
+
+    <!-- POBIERANIE BOTA -->
+    <div class="download-section" style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+      <a href="#" id="btn-download-installer" class="btn btn-primary btn-glow btn-lg" style="width: 100%; max-width: 420px; text-align: center;">
+        <span>🚀 Pobierz Instalator (.EXE) - 1 Kliknięcie</span>
+      </a>
+      <a href="#" id="btn-download-zip" class="btn btn-secondary" style="width: 100%; max-width: 420px; text-align: center; font-size: 13px;">
+        <span>📦 Lub pobierz wersję ZIP (wypakuj ręcznie)</span>
+      </a>
+      <a href="index.html" class="btn btn-secondary" style="margin-top: 6px; font-size: 12px; color: var(--text-muted);">
+        <span>Wróć do Strony Głównej Sklepu</span>
+      </a>
+    </div>
+
+    <!-- INSTRUKCJA SZYBKIEGO STARTU -->
+    <div class="instructions-box">
+      <strong>🚀 Jak zainstalować i uruchomić bota:</strong>
+      <ol style="margin-left: 18px; margin-top: 6px; line-height: 1.6;">
+        <li>Pobierz instalator klikając <strong>Pobierz Instalator (.EXE)</strong> i uruchom go.</li>
+        <li>Instalator w 2 sekundy utworzy skrót <strong>VectorMc</strong> na Twoim Pulpicie i sam uruchomi bota!</li>
+        <li>Nie musisz grzebać w plikach ani niczego wypakowywać – wszystko działa od razu!</li>
+        <li>Twój bot połączy się automatycznie – system rozpozna Twój kod HWID bez wpisywania kluczy.</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <script>
+    const durMap = {
+      '1d': '1 Dzień',
+      '7d': '7 Dni',
+      '30d': '30 Dni (1 Miesiąc)',
+      '365d': '365 Dni (1 Rok)',
+      'lifetime': 'Lifetime (Na zawsze)'
+    };
+
+    // Odczyt parametrów URL
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+
+    if (sessionId) {
+      document.getElementById('disp-hwid').textContent = 'Weryfikacja płatności w Stripe...';
+      document.getElementById('disp-nick').textContent = 'Pobieranie danych...';
+
+      fetch(`/api/verify-session?session_id=${encodeURIComponent(sessionId)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.paid) {
+            document.getElementById('disp-hwid').textContent = data.hwid || 'Aktywowano';
+            document.getElementById('disp-edition').textContent = data.edition === 'rust' 
+              ? 'VectorMc PRO (Rust Edition) 👑' 
+              : 'VectorMc Standard (Node.js Edition)';
+            document.getElementById('disp-duration').textContent = durMap[data.duration] || (data.durationDays ? `${data.durationDays} Dni` : data.duration);
+            document.getElementById('disp-nick').textContent = data.clientNick || 'Klient Stripe';
+            updateDownloadLink(data.edition);
+          } else {
+            document.getElementById('disp-hwid').textContent = 'Oczekiwanie na potwierdzenie banku...';
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          // Fallback na parametry z query jeśli były przekazane
+          loadFallbackParams();
+        });
+    } else {
+      loadFallbackParams();
+    }
+
+    function loadFallbackParams() {
+      const hwid = params.get('hwid') || '03D502E0-045E-052C-E306-BA0700080009';
+      const edition = params.get('edition') || 'rust';
+      const duration = params.get('duration') || '30d';
+      const nick = params.get('nick') || 'Klient';
+
+      document.getElementById('disp-hwid').textContent = hwid;
+      document.getElementById('disp-edition').textContent = edition === 'rust' ? 'VectorMc PRO (Rust Edition) 👑' : 'VectorMc Standard (Node.js Edition)';
+      document.getElementById('disp-duration').textContent = durMap[duration] || duration;
+      document.getElementById('disp-nick').textContent = nick;
+      updateDownloadLink(edition);
+    }
+
+    function updateDownloadLink(ed) {
+      const btnInstaller = document.getElementById('btn-download-installer');
+      const btnZip = document.getElementById('btn-download-zip');
+
+      if (ed === 'rust') {
+        if (btnInstaller) {
+          btnInstaller.setAttribute('href', '/downloads/VectorMc-PRO-Instalator.exe');
+          btnInstaller.setAttribute('download', 'VectorMc-PRO-Instalator.exe');
+        }
+        if (btnZip) {
+          btnZip.setAttribute('href', '/downloads/VectorMc-PRO-Rust.zip');
+          btnZip.setAttribute('download', 'VectorMc-PRO-Rust.zip');
+        }
+      } else {
+        if (btnInstaller) {
+          btnInstaller.setAttribute('href', '/downloads/VectorMc-Standard-Instalator.exe');
+          btnInstaller.setAttribute('download', 'VectorMc-Standard-Instalator.exe');
+        }
+        if (btnZip) {
+          btnZip.setAttribute('href', '/downloads/VectorMc-Standard-Node.zip');
+          btnZip.setAttribute('download', 'VectorMc-Standard-Node.zip');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
