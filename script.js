@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnPasteOrderHwid = document.getElementById('btn-paste-order-hwid');
   const orderGeneratedText = document.getElementById('order-generated-text');
   const btnCopyOrderText = document.getElementById('btn-copy-order-text');
-  const btnContactSylwek = document.getElementById('btn-contact-sylwek');
+  const btnContactDiscord = document.getElementById('btn-contact-discord');
   const copyOrderStatus = document.getElementById('copy-order-status');
   const btnPayStripe = document.getElementById('btn-pay-stripe');
   const stripeLoadingMsg = document.getElementById('stripe-loading-msg');
@@ -289,13 +289,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const hwid = (orderHwid && orderHwid.value.trim()) ? orderHwid.value.trim() : '[Podam po pierwszym uruchomieniu bota]';
 
     const msg = 
-`Cześć Sylwek! Chcę zamówić licencję na Twojego bota Minecraft:
+`Cześć! Chcę zamówić licencję na bota Minecraft:
 • Wersja bota: ${editionName}
 • Okres licencji: ${durationText}
 • Mój Nick/Discord: ${nick}
 • Mój kod HWID: ${hwid}
 
-Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
+Zgłoszenie z oficjalnego sklepu VectorMc.`;
 
     orderGeneratedText.value = msg;
   }
@@ -318,7 +318,7 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     btnCopyOrderText.addEventListener('click', () => {
       if (orderGeneratedText) {
         navigator.clipboard.writeText(orderGeneratedText.value).then(() => {
-          showCopyStatus('✅ Skopiowano treść zamówienia do schowka! Wyślij ją do Sylwka (Ctrl+V).');
+          showCopyStatus('✅ Skopiowano treść zamówienia do schowka! Wklej ją w tickecie na Discordzie (Ctrl+V).');
         }).catch(() => {
           orderGeneratedText.select();
           document.execCommand('copy');
@@ -328,18 +328,13 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     });
   }
 
-  if (btnContactSylwek) {
-    btnContactSylwek.addEventListener('click', () => {
+  if (btnContactDiscord) {
+    btnContactDiscord.addEventListener('click', (e) => {
+      e.preventDefault();
       if (orderGeneratedText) {
         navigator.clipboard.writeText(orderGeneratedText.value);
       }
-
-      const cfg = (typeof SHOP_CONFIG !== 'undefined') ? SHOP_CONFIG : null;
-      if (cfg && cfg.contact && cfg.contact.discordServerInvite) {
-        window.open(cfg.contact.discordServerInvite, '_blank');
-      } else {
-        showCopyStatus(`✅ Skopiowano wiadomość! Napisz do Sylwka na Discord (${(cfg && cfg.contact) ? cfg.contact.discordNick : 'Sylwek'}).`);
-      }
+      window.open('https://discord.gg/KyvwQR3mU', '_blank');
     });
   }
 

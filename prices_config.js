@@ -22,13 +22,14 @@ const SHOP_CONFIG = {
     notifyOnPayment: true
   },
 
-  // 3. DANE KONTAKTOWE SYLWKA (Twórcy)
+  // 3. DANE KONTAKTOWE & WSPARCIE DISCORD
   contact: {
-    authorName: "Sylwek",
-    discordNick: "Sylwek (Napisz na Discord)",
-    discordServerInvite: "", // wklej link do serwera Discord jeśli posiadasz
+    authorName: "VectorMc Team",
+    discordNick: "VectorMc Support",
+    discordServerInvite: "https://discord.gg/KyvwQR3mU",
+    ticketChannel: "ticket-bot",
     telegram: "@VectorMcBot",
-    contactNote: "W razie pytań lub płatności alternatywnych (np. PSC, Krypto) napisz bezpośrednio do mnie!"
+    contactNote: "W razie pytań, problemów lub płatności alternatywnych dołącz do Discorda i stwórz zgłoszenie na kanale #ticket-bot!"
   },
 
   // 4. CENY: WERSJA ZWYKŁA (Node.js Edition - mc-bot-node)

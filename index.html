@@ -34,7 +34,10 @@
         <a href="#faq">FAQ</a>
       </div>
 
-      <div class="nav-actions">
+      <div class="nav-actions" style="display: flex; gap: 10px; align-items: center;">
+        <a href="https://discord.gg/KyvwQR3mU" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px; border-color: rgba(88, 101, 242, 0.4); background: rgba(88, 101, 242, 0.15); color: #818cf8; text-decoration: none;">
+          <span>💬 Discord (#ticket-bot)</span>
+        </a>
         <a href="#editions" class="btn btn-primary btn-sm">
           <span>🛒 Zobacz Ceny</span>
         </a>
@@ -224,7 +227,7 @@
             </li>
             <li>
               <span class="check-icon gold">★</span>
-              <span><strong>Priorytetowe Wsparcie Twórcy (Sylwek)</strong> i stałe aktualizacje silnika</span>
+              <span><strong>Priorytetowe Wsparcie na Discord (#ticket-bot)</strong> i stałe aktualizacje silnika</span>
             </li>
           </ul>
 
@@ -333,23 +336,23 @@
 
         <div class="step-card">
           <div class="step-num">02</div>
-          <div class="step-icon">💬</div>
-          <h4>Napisz do Sylwka</h4>
-          <p>Skontaktuj się ze mną na Discordzie lub Telegramie. Ustalimy płatność i wyślę Ci paczkę z botem.</p>
+          <div class="step-icon">💳</div>
+          <h4>Płatność Online lub Ticket</h4>
+          <p>Kup licencję natychmiast przez Stripe (BLIK / Karta) lub dołącz na Discord i utwórz zgłoszenie na kanale #ticket-bot.</p>
         </div>
 
         <div class="step-card">
           <div class="step-num">03</div>
           <div class="step-icon">📋</div>
-          <h4>Skopiuj Kod HWID</h4>
-          <p>Uruchom bota na swoim komputerze. Program natychmiast sam skopiuje Twój unikalny kod HWID do schowka (Ctrl+V)!</p>
+          <h4>Wklej Kod HWID</h4>
+          <p>Pobierz z formularza 1-klikowy sprawdzacz HWID (.exe), który sam skopiuje Twój unikalny identyfikator komputera!</p>
         </div>
 
         <div class="step-card">
           <div class="step-num">04</div>
           <div class="step-icon">🚀</div>
-          <h4>Błyskawiczna Aktywacja</h4>
-          <p>Wyślij mi kod HWID. Aktywuję licencję w generatorze w kilkanaście sekund – bot od razu się odblokuje i działa!</p>
+          <h4>Automatyczna Aktywacja</h4>
+          <p>Po wpłacie system natychmiast aktywuje Twoją licencję i udostępnia pobieranie instalatora – bot działa od razu!</p>
         </div>
       </div>
     </div>
@@ -379,7 +382,7 @@
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-answer">
-            <p>Licencja powiązana jest z unikalnym sprzętowym identyfikatorem komputera (płyta główna/BIOS). W przypadku wymiany podzespołów lub komputera wystarczy napisać do Sylwka – stara licencja zostanie przepisana na Twój nowy sprzęt.</p>
+            <p>Licencja powiązana jest z unikalnym sprzętowym identyfikatorem komputera (płyta główna/BIOS). W przypadku wymiany podzespołów lub komputera wystarczy dołączyć na nasz Discord i otworzyć ticket na kanale <strong>#ticket-bot</strong> – licencja zostanie natychmiast przepisana na Twój nowy sprzęt.</p>
           </div>
         </div>
 
@@ -423,7 +426,7 @@
           <span class="modal-icon">🛒</span>
           <div>
             <h3>Zamówienie Licencji Bota</h3>
-            <p id="modal-edition-subtitle">Skonfiguruj swoje zamówienie i wyślij je do Sylwka</p>
+            <p id="modal-edition-subtitle">Wybierz licencję i opłać bezpiecznie online</p>
           </div>
         </div>
         <button type="button" class="btn-close" onclick="closeOrderModal()">✕</button>
@@ -519,12 +522,12 @@
           <div style="position: relative; text-align: center; margin: 20px 0 16px;">
             <div style="height: 1px; background: var(--border-color);"></div>
             <span style="position: relative; top: -11px; background: #0e1526; padding: 0 12px; font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
-              LUB ZAMÓW RĘCZNIE U SYLWKA (PSC / KRYPTO / BLIK PRYWATNY)
+              POTRZEBUJESZ POMOCY LUB INNEJ PŁATNOŚCI? (DISCORD #TICKET-BOT)
             </span>
           </div>
 
           <div class="generated-message-box" style="margin-top: 0;">
-            <label>Gotowa treść wiadomości do wysłania do Sylwka:</label>
+            <label>Gotowa treść zamówienia (opcjonalnie do ticketa na Discordzie):</label>
             <textarea id="order-generated-text" readonly rows="3" class="mono"></textarea>
           </div>
 
@@ -532,12 +535,12 @@
             <button type="button" class="btn btn-secondary" id="btn-copy-order-text">
               📋 Skopiuj Wiadomość
             </button>
-            <button type="button" class="btn btn-secondary" id="btn-contact-sylwek">
-              💬 Napisz na Discord
-            </button>
+            <a href="https://discord.gg/KyvwQR3mU" target="_blank" class="btn btn-secondary" id="btn-contact-discord" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: rgba(88, 101, 242, 0.2); border-color: rgba(88, 101, 242, 0.5); color: #818cf8;">
+              💬 Dołącz do Discorda (#ticket-bot)
+            </a>
           </div>
           <div id="copy-order-status" class="copy-status-msg" style="display: none;">
-            ✅ Skopiowano treść zamówienia do schowka! Wklej ją w wiadomości do Sylwka (Ctrl+V).
+            ✅ Skopiowano treść zamówienia do schowka! Wklej ją w tickecie na Discordzie (Ctrl+V).
           </div>
 
         </form>
@@ -557,9 +560,9 @@
 
       <div class="footer-links">
         <div>
-          <h4>Twórca Projektu</h4>
-          <p><strong>Sylwek</strong> – Deweloper & Administrator</p>
-          <p style="color: var(--text-muted); font-size: 12.5px;">Wszelkie licencje, kody HWID i pytania kieruj bezpośrednio w kontakcie.</p>
+          <h4>Wsparcie & Pomoc Discord</h4>
+          <p><a href="https://discord.gg/KyvwQR3mU" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;"><span>💬 Oficjalny Serwer Discord</span></a></p>
+          <p style="color: var(--text-muted); font-size: 12.5px;">W razie problemu, pytań lub błędu stwórz zgłoszenie na kanale <strong>#ticket-bot</strong> – zespół VectorMc pomoże natychmiast!</p>
         </div>
       </div>
     </div>
@@ -568,7 +571,7 @@
     </div>
   </footer>
 
-  <script src="prices_config.js?v=3.3"></script>
-  <script src="script.js?v=3.3"></script>
+  <script src="prices_config.js?v=3.4"></script>
+  <script src="script.js?v=3.4"></script>
 </body>
 </html>

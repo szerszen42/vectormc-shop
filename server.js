@@ -317,7 +317,7 @@ const server = http.createServer((req, res) => {
         const host = req.headers.host || `localhost:${PORT}`;
         const protocol = req.headers['x-forwarded-proto'] || 'http';
 
-        // 1. Jeśli Sylwek podał klucz Stripe -> Prawdziwa sesja Stripe Checkout (BLIK, Karta, P24, itp.)
+        // 1. Jeśli podano klucz Stripe -> Prawdziwa sesja Stripe Checkout (BLIK, Karta, P24, itp.)
         if (hasRealStripeKey) {
           const cancelQuery = new URLSearchParams({
             canceled: '1',
@@ -359,7 +359,7 @@ const server = http.createServer((req, res) => {
           });
         }
 
-        // 2. Tryb Symulacji (jeśli Sylwek jeszcze nie wkleił klucza Stripe)
+        // 2. Tryb Symulacji (jeśli jeszcze nie skonfigurowano klucza Stripe)
         // Pozwala przetestować cały proces zakupu i natychmiastowej aktywacji licencji!
         console.log(`[STRIPE SIMULATOR] Tworzenie testowego zakupu dla HWID: ${cleanHwid}`);
         
