@@ -314,9 +314,18 @@ const server = http.createServer((req, res) => {
 
         // 1. Jeśli Sylwek podał klucz Stripe -> Prawdziwa sesja Stripe Checkout (BLIK, Karta, P24, itp.)
         if (hasRealStripeKey) {
+          const cancelQuery = new URLSearchParams({
+            canceled: '1',
+            edition: selectedEdition,
+            duration: duration,
+            nick: clientNick || '',
+            email: clientEmail || '',
+            hwid: cleanHwid
+          }).toString();
+
           const postData = {
             'success_url': `${protocol}://${host}/sukces.html?session_id={CHECKOUT_SESSION_ID}`,
-            'cancel_url': `${protocol}://${host}/#editions`,
+            'cancel_url': `${protocol}://${host}/?${cancelQuery}#zamow`,
             'mode': 'payment',
             'line_items[0][price_data][currency]': currency,
             'line_items[0][price_data][product_data][name]': productName,

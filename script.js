@@ -198,6 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = await res.json();
         if (data.success && data.checkoutUrl) {
+          try {
+            sessionStorage.setItem('vectormc_draft_order', JSON.stringify(payload));
+          } catch (e) {}
           window.location.href = data.checkoutUrl;
         } else {
           alert('Błąd płatności: ' + (data.error || 'Nie udało się połączyć z bramką Stripe.'));
@@ -244,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateGeneratedMessage() {
+    saveDraftOrder();
     if (!orderGeneratedText) return;
 
     const editionName = (selectedEdition === 'rust') 
@@ -265,6 +269,19 @@ document.addEventListener('DOMContentLoaded', () => {
 Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
 
     orderGeneratedText.value = msg;
+  }
+
+  function saveDraftOrder() {
+    try {
+      const payload = {
+        edition: selectedEdition,
+        duration: selectedDuration,
+        clientNick: (orderClientNick && orderClientNick.value) ? orderClientNick.value.trim() : '',
+        clientEmail: (orderClientEmail && orderClientEmail.value) ? orderClientEmail.value.trim() : '',
+        hwid: (orderHwid && orderHwid.value) ? orderHwid.value.trim() : ''
+      };
+      sessionStorage.setItem('vectormc_draft_order', JSON.stringify(payload));
+    } catch (e) {}
   }
 
   if (btnCopyOrderText) {
@@ -320,5 +337,45 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     });
   });
 
+  function restoreDraftOrder() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isCanceled = urlParams.get('canceled') === '1' || window.location.hash === '#zamow';
+
+    let draft = null;
+    try {
+      const raw = sessionStorage.getItem('vectormc_draft_order');
+      if (raw) draft = JSON.parse(raw);
+    } catch (e) {}
+
+    const nick = urlParams.get('nick') || (draft && draft.clientNick);
+    const email = urlParams.get('email') || (draft && draft.clientEmail);
+    const hwid = urlParams.get('hwid') || (draft && draft.hwid);
+    const edition = urlParams.get('edition') || (draft && draft.edition) || 'rust';
+    const duration = urlParams.get('duration') || (draft && draft.duration) || '30d';
+
+    if (isCanceled || (draft && (hwid || nick))) {
+      if (orderClientNick && nick) orderClientNick.value = nick;
+      if (orderClientEmail && email) orderClientEmail.value = email;
+      if (orderHwid && hwid) orderHwid.value = hwid;
+      if (duration) {
+        selectedDuration = duration;
+        if (orderDurationSelect) orderDurationSelect.value = duration;
+        updatePricingCards(duration);
+      }
+      openOrderModal(edition);
+      updateGeneratedMessage();
+
+      if (btnPayStripe) btnPayStripe.disabled = false;
+      if (stripeLoadingMsg) stripeLoadingMsg.style.display = 'none';
+
+      if (urlParams.get('canceled')) {
+        const cleanUrl = window.location.pathname + (window.location.hash || '#zamow');
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
+    }
+  }
+
   updatePricingCards('30d');
+  window.addEventListener('pageshow', restoreDraftOrder);
+  restoreDraftOrder();
 });
