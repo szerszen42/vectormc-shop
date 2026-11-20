@@ -291,10 +291,14 @@ const server = http.createServer((req, res) => {
         }
 
         const currency = (SHOP_CONFIG.stripe && SHOP_CONFIG.stripe.currency) ? SHOP_CONFIG.stripe.currency : 'pln';
-        const secretKey = (SHOP_CONFIG.stripe && SHOP_CONFIG.stripe.secretKey) ? SHOP_CONFIG.stripe.secretKey.trim() : '';
+        const secretKey = (process.env.STRIPE_SECRET_KEY || (SHOP_CONFIG.stripe && SHOP_CONFIG.stripe.secretKey) || '').trim();
 
         // Sprawdź czy wprowadzono rzeczywisty klucz Stripe (sk_test_... lub sk_live_...)
-        const hasRealStripeKey = (secretKey.startsWith('sk_test_') || secretKey.startsWith('sk_live_')) && !secretKey.includes('TYTUJ_WSTAW') && secretKey.length > 25;
+        const hasRealStripeKey = (secretKey.startsWith('sk_test_51') || secretKey.startsWith('sk_live_51') || (secretKey.startsWith('sk_') && secretKey.length > 50))
+          && !secretKey.includes('KLUCZ')
+          && !secretKey.includes('PRYWATNY')
+          && !secretKey.includes('WSTAW')
+          && !secretKey.includes('TYTUJ');
 
         const durationTitleMap = {
           '1d': '1 Dzień',
@@ -535,7 +539,8 @@ const server = http.createServer((req, res) => {
         '.png': 'image/png',
         '.svg': 'image/svg+xml',
         '.zip': 'application/zip',
-        '.exe': 'application/octet-stream'
+        '.exe': 'application/octet-stream',
+        '.bat': 'text/plain; charset=utf-8'
       };
       return serveStatic(res, staticPath, mimeTypes[ext] || 'text/plain');
     }

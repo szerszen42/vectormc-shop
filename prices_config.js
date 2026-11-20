@@ -7,12 +7,12 @@ const SHOP_CONFIG = {
   // 1. DANE INTEGRACJI STRIPE (Płatności BLIK, Karta, Apple Pay, Google Pay)
   // Klucze ze stripe.com (pk_test_... i sk_test_...)
   stripe: {
-    enabled: true, // Ustaw na true, aby włączyć płatności Stripe
-    currency: "pln", // Waluta: pln, eur, usd
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "pk_test_KLUCZ_PUBLICZNY_STRIPE",
-    secretKey: process.env.STRIPE_SECRET_KEY || "sk_test_KLUCZ_PRYWATNY_STRIPE",
-    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET || "whsec_WSTAW_WEBHOOK_SECRET", // z zakładki Webhooks w Stripe
-    testModeSimulator: false // Prawdziwa kasa Stripe Checkout aktywna!
+    enabled: true,
+    currency: "pln",
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "",
+    secretKey: process.env.STRIPE_SECRET_KEY || "",
+    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET || "",
+    testModeSimulator: false
   },
 
   // 2. POWIADOMIENIA DISCORD WEBHOOK

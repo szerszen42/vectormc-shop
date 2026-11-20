@@ -227,6 +227,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const btnCopyHwidCmd = document.getElementById('btn-copy-hwid-cmd');
+  const hwidCmdTooltip = document.getElementById('hwid-cmd-tooltip');
+  if (btnCopyHwidCmd) {
+    btnCopyHwidCmd.addEventListener('click', () => {
+      const psCmd = '(Get-CimInstance Win32_ComputerSystemProduct).UUID | Set-Clipboard';
+      navigator.clipboard.writeText(psCmd).then(() => {
+        if (hwidCmdTooltip) {
+          hwidCmdTooltip.textContent = '✅ Skopiowano komendę do schowka! Otwórz PowerShell, wklej (Ctrl+V) i kliknij Enter – Twój HWID natychmiast trafi do schowka!';
+          hwidCmdTooltip.style.color = '#4ade80';
+        }
+      }).catch(() => {
+        alert('Komenda: (Get-CimInstance Win32_ComputerSystemProduct).UUID | Set-Clipboard');
+      });
+    });
+  }
+
   function updateGeneratedMessage() {
     if (!orderGeneratedText) return;
 

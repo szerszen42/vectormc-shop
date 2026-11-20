@@ -61,13 +61,12 @@ function getFilesToSync(dir, baseDir = '') {
     if (entry.name.startsWith('.git') && entry.name !== '.gitignore') continue;
     if (entry.name === 'node_modules') continue;
     if (entry.name === 'sync_token.txt') continue;
-    if (entry.name.endsWith('.bat')) continue; // skrypty Windows niepotrzebne na Renderze
+    if (entry.name.startsWith('Uruchom_') && entry.name.endsWith('.bat')) continue;
 
     if (entry.isDirectory()) {
-      if (entry.name === 'downloads') continue; // duże pliki binarne > 25MB
       results = results.concat(getFilesToSync(fullPath, relPath));
     } else if (entry.isFile()) {
-      // Ignoruj pliki większe niż 20MB
+      // Ignoruj pliki większe niż 20MB (np. duże paczki binarne node_modules/instalatory)
       const stat = fs.statSync(fullPath);
       if (stat.size < 20 * 1024 * 1024) {
         results.push({ fullPath, relPath });
