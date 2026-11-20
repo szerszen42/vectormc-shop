@@ -1,19 +1,15 @@
-// =========================================================
-// SKRYPT INTERAKTYWNY DLA SKLEPU VECTORMC
-// =========================================================
+
 
 document.addEventListener('DOMContentLoaded', () => {
   let selectedDuration = '30d';
   let selectedEdition = 'rust';
 
-  // Elementy DOM
   const durationBtns = document.querySelectorAll('.duration-btn');
   const priceNodeVal = document.getElementById('price-node-val');
   const priceNodePeriod = document.getElementById('price-node-period');
   const priceRustVal = document.getElementById('price-rust-val');
   const priceRustPeriod = document.getElementById('price-rust-period');
 
-  // Modal Zamówienia
   const orderModalOverlay = document.getElementById('order-modal-overlay');
   const radioEditionNode = document.getElementById('radio-edition-node');
   const radioEditionRust = document.getElementById('radio-edition-rust');
@@ -47,11 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'lifetime': 'Na zawsze (Lifetime / Bezterminowa)'
   };
 
-  // Aktualizacja cen na kartach
   function updatePricingCards(dur) {
     selectedDuration = dur;
 
-    // Przełączanie aktywnego przycisku
     durationBtns.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.duration === dur);
     });
@@ -68,13 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (priceRustVal) priceRustVal.textContent = (rustPrice === 'Do ustalenia' || rustPrice === 'Indywidualnie') ? rustPrice : `${rustPrice}`;
     if (priceRustPeriod) priceRustPeriod.textContent = periodText;
 
-    // Aktualizacja w modalu jeśli otwarty
     if (orderDurationSelect) orderDurationSelect.value = dur;
     updateModalCustomDaysVisibility();
     updateGeneratedMessage();
   }
 
-  // Obsługa kliknięć w przełącznik czasu trwania
   durationBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const dur = btn.dataset.duration;
@@ -82,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Otwieranie Modalu Zamówienia
   window.openOrderModal = function(edition) {
     selectedEdition = edition || 'rust';
     if (edition === 'node') {
@@ -112,19 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Zamknięcie przy kliknięciu w tło
   if (orderModalOverlay) {
     orderModalOverlay.addEventListener('click', (e) => {
       if (e.target === orderModalOverlay) closeOrderModal();
     });
   }
 
-  // Klawisz Escape zamyka modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeOrderModal();
   });
 
-  // Zmiana edycji w modalu
   if (radioEditionNode) {
     radioEditionNode.addEventListener('change', () => {
       selectedEdition = 'node';
@@ -139,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Zmiana czasu trwania w modalu
   if (orderDurationSelect) {
     orderDurationSelect.addEventListener('change', () => {
       selectedDuration = orderDurationSelect.value;
@@ -173,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     orderClientEmail.addEventListener('input', updateGeneratedMessage);
   }
 
-  // Obsługa Płatności Stripe
   if (btnPayStripe) {
     btnPayStripe.addEventListener('click', async () => {
       const hwid = orderHwid ? orderHwid.value.trim() : '';
@@ -227,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Wklejanie HWID ze schowka w formularzu zamówienia
   if (btnPasteOrderHwid) {
     btnPasteOrderHwid.addEventListener('click', async () => {
       try {
@@ -242,7 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Generowanie treści wiadomości zamówienia
   function updateGeneratedMessage() {
     if (!orderGeneratedText) return;
 
@@ -267,7 +251,6 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     orderGeneratedText.value = msg;
   }
 
-  // Kopiowanie zamówienia do schowka
   if (btnCopyOrderText) {
     btnCopyOrderText.addEventListener('click', () => {
       if (orderGeneratedText) {
@@ -282,7 +265,6 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     });
   }
 
-  // Przycisk "Napisz do Sylwka na Discord"
   if (btnContactSylwek) {
     btnContactSylwek.addEventListener('click', () => {
       if (orderGeneratedText) {
@@ -307,14 +289,13 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     }, 4500);
   }
 
-  // FAQ Akordeon
   const faqQuestions = document.querySelectorAll('.faq-question');
   faqQuestions.forEach(btn => {
     btn.addEventListener('click', () => {
       const parent = btn.closest('.faq-item');
       if (parent) {
         const isOpen = parent.classList.contains('open');
-        // Zamknij inne
+
         document.querySelectorAll('.faq-item.open').forEach(item => {
           if (item !== parent) item.classList.remove('open');
         });
@@ -323,6 +304,5 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     });
   });
 
-  // Startowa inicjalizacja cen
   updatePricingCards('30d');
 });

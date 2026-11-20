@@ -13,12 +13,10 @@
 </head>
 <body>
 
-  <!-- TŁO Z EFEKTAMI CZĄSTECZKOWYMI / GRADIENTEM -->
   <div class="bg-glow bg-glow-1"></div>
   <div class="bg-glow bg-glow-2"></div>
   <div class="grid-overlay"></div>
 
-  <!-- GÓRNY PASEK NAWIGACJI -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="#" class="brand-logo">
@@ -44,7 +42,6 @@
     </div>
   </nav>
 
-  <!-- SEKCJA HERO -->
   <header class="hero-section">
     <div class="container hero-content">
       <div class="hero-badge">
@@ -96,7 +93,6 @@
     </div>
   </header>
 
-  <!-- PRZEŁĄCZNIK OKRESU LICENCJI (INTERAKTYWNY) -->
   <section class="duration-section" id="editions">
     <div class="container">
       <div class="section-header">
@@ -119,10 +115,8 @@
         </button>
       </div>
 
-      <!-- KARTY DWÓCH WERSJI BOTA -->
       <div class="pricing-grid">
 
-        <!-- KARTA 1: WERSJA ZWYKŁA (NODE.JS) -->
         <div class="pricing-card card-node" id="card-node">
           <div class="card-header">
             <div class="card-badge">Klasyczna Wersja</div>
@@ -175,7 +169,6 @@
           </div>
         </div>
 
-        <!-- KARTA 2: WERSJA PREMIUM (VECTORMC RUST) -->
         <div class="pricing-card card-rust featured" id="card-rust">
           <div class="featured-ribbon">🔥 POLECAMY - NAJWYŻSZA WYDAJNOŚĆ</div>
           
@@ -246,7 +239,6 @@
     </div>
   </section>
 
-  <!-- TABELA PORÓWNANIA SILNIKÓW -->
   <section class="comparison-section" id="comparison">
     <div class="container">
       <div class="section-header">
@@ -323,7 +315,6 @@
     </div>
   </section>
 
-  <!-- JAK KUPIĆ I AKTYWOWAĆ (KROK PO KROKU) -->
   <section class="steps-section" id="how-it-works">
     <div class="container">
       <div class="section-header">
@@ -364,7 +355,6 @@
     </div>
   </section>
 
-  <!-- CZĘSTO ZADAWANE PYTANIA (FAQ) -->
   <section class="faq-section" id="faq">
     <div class="container">
       <div class="section-header">
@@ -426,7 +416,6 @@
     </div>
   </section>
 
-  <!-- MODAL ZAMÓWIENIA / GENERATOR WIADOMOŚCI -->
   <div class="modal-overlay" id="order-modal-overlay" style="display: none;">
     <div class="order-modal glass-card">
       <div class="modal-header">
@@ -494,7 +483,6 @@
             </small>
           </div>
 
-          <!-- GŁÓWNA AUTOMATYCZNA PŁATNOŚĆ STRIPE -->
           <div style="margin: 24px 0 16px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 14px; padding: 18px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;">
               <span style="font-size: 18px;">⚡</span>
@@ -517,7 +505,6 @@
             </div>
           </div>
 
-          <!-- ALTERNATYWNY KONTAKT RĘCZNY -->
           <div style="position: relative; text-align: center; margin: 20px 0 16px;">
             <div style="height: 1px; background: var(--border-color);"></div>
             <span style="position: relative; top: -11px; background: #0e1526; padding: 0 12px; font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
@@ -525,7 +512,6 @@
             </span>
           </div>
 
-          <!-- GENEROWANY TEKST ZAMÓWIENIA -->
           <div class="generated-message-box" style="margin-top: 0;">
             <label>Gotowa treść wiadomości do wysłania do Sylwka:</label>
             <textarea id="order-generated-text" readonly rows="3" class="mono"></textarea>
@@ -548,7 +534,6 @@
     </div>
   </div>
 
-  <!-- STOPKA STRONY -->
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-brand">
@@ -572,7 +557,6 @@
     </div>
   </footer>
 
-  <!-- SKRYPTY -->
   <script src="prices_config.js"></script>
   <script src="script.js"></script>
 </body>
