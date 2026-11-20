@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   window.openOrderModal = function(edition) {
+    sessionStorage.removeItem('vectormc_modal_closed_by_user');
     selectedEdition = edition || 'rust';
     if (edition === 'node') {
       if (radioEditionNode) radioEditionNode.checked = true;
@@ -90,17 +91,30 @@ document.addEventListener('DOMContentLoaded', () => {
       orderModalOverlay.style.display = 'flex';
       document.body.style.overflow = 'hidden';
       setTimeout(() => {
-        if (orderClientNick) orderClientNick.focus();
+        if (orderClientNick && !orderClientNick.value) orderClientNick.focus();
       }, 100);
     }
+
+    try {
+      if (window.location.hash !== '#zamow') {
+        window.history.replaceState({}, document.title, window.location.pathname + '#zamow');
+      }
+    } catch (e) {}
   };
 
   window.closeOrderModal = function() {
+    sessionStorage.setItem('vectormc_modal_closed_by_user', '1');
     if (orderModalOverlay) {
       orderModalOverlay.style.display = 'none';
       document.body.style.overflow = '';
       if (copyOrderStatus) copyOrderStatus.style.display = 'none';
     }
+
+    try {
+      if (window.location.hash === '#zamow') {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    } catch (e) {}
   };
 
   if (orderModalOverlay) {
@@ -280,6 +294,7 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
         clientEmail: (orderClientEmail && orderClientEmail.value) ? orderClientEmail.value.trim() : '',
         hwid: (orderHwid && orderHwid.value) ? orderHwid.value.trim() : ''
       };
+      localStorage.setItem('vectormc_draft_order', JSON.stringify(payload));
       sessionStorage.setItem('vectormc_draft_order', JSON.stringify(payload));
     } catch (e) {}
   }
@@ -340,10 +355,11 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
   function restoreDraftOrder() {
     const urlParams = new URLSearchParams(window.location.search);
     const isCanceled = urlParams.get('canceled') === '1' || window.location.hash === '#zamow';
+    const closedByUser = sessionStorage.getItem('vectormc_modal_closed_by_user') === '1';
 
     let draft = null;
     try {
-      const raw = sessionStorage.getItem('vectormc_draft_order');
+      const raw = localStorage.getItem('vectormc_draft_order') || sessionStorage.getItem('vectormc_draft_order');
       if (raw) draft = JSON.parse(raw);
     } catch (e) {}
 
@@ -353,23 +369,24 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
     const edition = urlParams.get('edition') || (draft && draft.edition) || 'rust';
     const duration = urlParams.get('duration') || (draft && draft.duration) || '30d';
 
-    if (isCanceled || (draft && (hwid || nick))) {
-      if (orderClientNick && nick) orderClientNick.value = nick;
-      if (orderClientEmail && email) orderClientEmail.value = email;
-      if (orderHwid && hwid) orderHwid.value = hwid;
-      if (duration) {
-        selectedDuration = duration;
-        if (orderDurationSelect) orderDurationSelect.value = duration;
-        updatePricingCards(duration);
-      }
+    if (nick && orderClientNick) orderClientNick.value = nick;
+    if (email && orderClientEmail) orderClientEmail.value = email;
+    if (hwid && orderHwid) orderHwid.value = hwid;
+    if (duration) {
+      selectedDuration = duration;
+      if (orderDurationSelect) orderDurationSelect.value = duration;
+      updatePricingCards(duration);
+    }
+
+    if (btnPayStripe) btnPayStripe.disabled = false;
+    if (stripeLoadingMsg) stripeLoadingMsg.style.display = 'none';
+
+    if (isCanceled || (draft && (draft.hwid || draft.clientNick) && !closedByUser)) {
       openOrderModal(edition);
       updateGeneratedMessage();
 
-      if (btnPayStripe) btnPayStripe.disabled = false;
-      if (stripeLoadingMsg) stripeLoadingMsg.style.display = 'none';
-
       if (urlParams.get('canceled')) {
-        const cleanUrl = window.location.pathname + (window.location.hash || '#zamow');
+        const cleanUrl = window.location.pathname + '#zamow';
         window.history.replaceState({}, document.title, cleanUrl);
       }
     }
@@ -377,5 +394,9 @@ Napisz proszę jak z płatnością i aktywacją licencji! Dzięki.`;
 
   updatePricingCards('30d');
   window.addEventListener('pageshow', restoreDraftOrder);
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#zamow') restoreDraftOrder();
+  });
+  window.addEventListener('popstate', restoreDraftOrder);
   restoreDraftOrder();
 });
