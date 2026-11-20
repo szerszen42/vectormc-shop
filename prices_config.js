@@ -9,9 +9,9 @@ const SHOP_CONFIG = {
   stripe: {
     enabled: true,
     currency: "pln",
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "",
-    secretKey: process.env.STRIPE_SECRET_KEY || "",
-    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET || "",
+    publishableKey: (typeof process !== 'undefined' && process.env && process.env.STRIPE_PUBLISHABLE_KEY) || "",
+    secretKey: (typeof process !== 'undefined' && process.env && process.env.STRIPE_SECRET_KEY) || "",
+    webhookSecret: (typeof process !== 'undefined' && process.env && process.env.STRIPE_WEBHOOK_SECRET) || "",
     testModeSimulator: false
   },
 

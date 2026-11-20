@@ -43,6 +43,23 @@ document.addEventListener('DOMContentLoaded', () => {
     'lifetime': 'Na zawsze (Lifetime / Bezterminowa)'
   };
 
+  const fallbackPrices = {
+    node: {
+      '1d': '2.50 PLN',
+      '7d': '5 PLN',
+      '30d': '10 PLN',
+      '365d': '37.50 PLN',
+      'lifetime': '75 PLN'
+    },
+    rust: {
+      '1d': '5 PLN',
+      '7d': '10 PLN',
+      '30d': '20 PLN',
+      '365d': '75 PLN',
+      'lifetime': '150 PLN'
+    }
+  };
+
   function updatePricingCards(dur) {
     selectedDuration = dur;
 
@@ -51,15 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const cfg = (typeof SHOP_CONFIG !== 'undefined') ? SHOP_CONFIG : null;
-    const nodePrice = (cfg && cfg.nodeEdition && cfg.nodeEdition.prices[dur]) ? cfg.nodeEdition.prices[dur] : 'Do ustalenia';
-    const rustPrice = (cfg && cfg.rustEdition && cfg.rustEdition.prices[dur]) ? cfg.rustEdition.prices[dur] : 'Do ustalenia';
+    const nodePrice = (cfg && cfg.nodeEdition && cfg.nodeEdition.prices && cfg.nodeEdition.prices[dur]) 
+      ? cfg.nodeEdition.prices[dur] 
+      : (fallbackPrices.node[dur] || '10 PLN');
+    const rustPrice = (cfg && cfg.rustEdition && cfg.rustEdition.prices && cfg.rustEdition.prices[dur]) 
+      ? cfg.rustEdition.prices[dur] 
+      : (fallbackPrices.rust[dur] || '20 PLN');
 
     const periodText = periodLabels[dur] || '';
 
-    if (priceNodeVal) priceNodeVal.textContent = (nodePrice === 'Do ustalenia' || nodePrice === 'Indywidualnie') ? nodePrice : `${nodePrice}`;
+    if (priceNodeVal) priceNodeVal.textContent = nodePrice;
     if (priceNodePeriod) priceNodePeriod.textContent = periodText;
 
-    if (priceRustVal) priceRustVal.textContent = (rustPrice === 'Do ustalenia' || rustPrice === 'Indywidualnie') ? rustPrice : `${rustPrice}`;
+    if (priceRustVal) priceRustVal.textContent = rustPrice;
     if (priceRustPeriod) priceRustPeriod.textContent = periodText;
 
     if (orderDurationSelect) orderDurationSelect.value = dur;
@@ -116,12 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (e) {}
   };
-
-  if (orderModalOverlay) {
-    orderModalOverlay.addEventListener('click', (e) => {
-      if (e.target === orderModalOverlay) closeOrderModal();
-    });
-  }
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeOrderModal();
