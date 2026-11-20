@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mock_cs_1794950743129",
+    "hwid": "RUUTYRJYFTSNU654N8645865I",
+    "name": "ero5163",
+    "edition": "rust",
+    "duration": "30d",
+    "amount": "69 PLN",
+    "createdAt": 1794950743129,
+    "status": "paid"
+  },
+  {
+    "id": "mock_cs_1794950408764",
+    "hwid": "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",
+    "name": "Janek_Gamer",
+    "edition": "rust",
+    "duration": "30d",
+    "amount": "69 PLN",
+    "createdAt": 1794950408764,
+    "status": "paid"
+  }
+]
